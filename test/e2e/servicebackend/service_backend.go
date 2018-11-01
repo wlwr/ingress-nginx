@@ -51,7 +51,7 @@ var _ = framework.IngressNginxDescribe("Service backend - 503", func() {
 
 		err = f.WaitForNginxServer(host,
 			func(server string) bool {
-				return strings.Contains(server, "return 503;")
+				return strings.Contains(server, "proxy_pass http://upstream_balancer;")
 			})
 		Expect(err).NotTo(HaveOccurred())
 
@@ -78,7 +78,7 @@ var _ = framework.IngressNginxDescribe("Service backend - 503", func() {
 
 		err = f.WaitForNginxServer(host,
 			func(server string) bool {
-				return strings.Contains(server, "return 503;")
+				return strings.Contains(server, "proxy_pass http://upstream_balancer;")
 			})
 		Expect(err).NotTo(HaveOccurred())
 
